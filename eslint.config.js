@@ -29,6 +29,8 @@ export default [
         localStorage: 'readonly',
         FileReader: 'readonly',
         URL: 'readonly',
+        Blob: 'readonly',
+        File: 'readonly',
         // Node globals
         process: 'readonly',
         __dirname: 'readonly',
@@ -37,6 +39,9 @@ export default [
         require: 'readonly',
         exports: 'readonly',
         global: 'readonly',
+        AbortController: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
       },
     },
     settings: {
