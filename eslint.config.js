@@ -31,6 +31,7 @@ export default [
         URL: 'readonly',
         Blob: 'readonly',
         File: 'readonly',
+        DOMException: 'readonly',
         // Node globals
         process: 'readonly',
         __dirname: 'readonly',

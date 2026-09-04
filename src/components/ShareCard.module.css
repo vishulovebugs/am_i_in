@@ -1,0 +1,109 @@
+/* src/components/ShareCard.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.shareCard {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: var(--radius-lg);
+  color: white;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+
+.cardHeader {
+  margin-bottom: 1.5rem;
+}
+
+.appName {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.cardScore {
+  margin: 1rem 0;
+}
+
+.scoreValue {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.scoreLabel {
+  font-size: 0.875rem;
+  opacity: 0.8;
+  margin-top: 0.25rem;
+}
+
+.cardSignals {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.signalItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.signalItem:last-child {
+  border-bottom: none;
+}
+
+.signalName {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.signalScore {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.cardDisclaimer {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.625rem;
+  opacity: 0.7;
+  line-height: 1.4;
+}
+
+.downloadButton {
+  padding: 0.875rem 1.5rem;
+  border: none;
+  border-radius: var(--radius-md);
+  background-color: var(--accent);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.downloadButton:hover {
+  background-color: var(--accent-dark);
+}
+
+.downloadButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

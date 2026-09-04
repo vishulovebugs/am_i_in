@@ -44,8 +44,9 @@ describe('Landing route', () => {
     await user.click(getStartedButton);
 
     // Wait for navigation and verify we're on /input
+    // Use getByRole to specifically find the h1 heading (level 1, not the h3)
     await waitFor(() => {
-      expect(screen.getByText(/paste your chat/i)).toBeInTheDocument();
+      expect(screen.getByRole('heading', { level: 1, name: /paste your chat/i })).toBeInTheDocument();
     });
   });
 });
@@ -89,8 +90,10 @@ describe('ScoreGauge', () => {
   it('renders insufficient data message when score is null', () => {
     render(<ScoreGauge score={null} />);
 
-    expect(screen.getByText(/insufficient/i)).toBeInTheDocument();
-    expect(screen.getByText(/data/i)).toBeInTheDocument();
+    // ScoreGauge now shows "Insufficient data" in two places (gauge center + description)
+    // Use getAllByText to handle multiple matches
+    const insufficientElements = screen.getAllByText(/insufficient/i);
+    expect(insufficientElements.length).toBeGreaterThanOrEqual(1);
   });
 
   it('displays custom label when provided', () => {

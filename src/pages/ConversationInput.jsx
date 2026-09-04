@@ -103,16 +103,22 @@ export default function ConversationInput() {
       </div>
 
       {/* Tabs */}
-      <div className={styles.tabs}>
+      <div className={styles.tabs} role="tablist">
         <button
           className={`${styles.tab} ${activeTab === 'paste' ? styles.tabActive : ''}`}
           onClick={() => setActiveTab('paste')}
+          role="tab"
+          aria-selected={activeTab === 'paste'}
+          aria-controls="panel-paste"
         >
           📝 Paste Text
         </button>
         <button
           className={`${styles.tab} ${activeTab === 'upload' ? styles.tabActive : ''}`}
           onClick={() => setActiveTab('upload')}
+          role="tab"
+          aria-selected={activeTab === 'upload'}
+          aria-controls="panel-upload"
         >
           📸 Upload Screenshot
         </button>
@@ -122,7 +128,21 @@ export default function ConversationInput() {
       <div className={styles.tabContent}>
         {/* Paste text tab */}
         {activeTab === 'paste' && (
-          <>
+          <div id="panel-paste" role="tabpanel">
+            {/* Empty state guidance */}
+            {!hasParsed && messages.length === 0 && (
+              <div className={styles.emptyGuidance}>
+                <div className={styles.guidanceIcon}>💬</div>
+                <h3 className={styles.guidanceTitle}>How to paste your chat</h3>
+                <ul className={styles.guidanceList}>
+                  <li>Open your conversation in iMessage, WhatsApp, Instagram, etc.</li>
+                  <li>Select and copy the messages you want to analyze</li>
+                  <li>Paste them in the box below</li>
+                  <li>Choose a parse mode and click Parse</li>
+                </ul>
+              </div>
+            )}
+
             <div className={styles.textareaSection}>
               <label className={styles.textareaLabel} htmlFor="chat-input">
                 Paste your conversation below:
@@ -133,18 +153,24 @@ export default function ConversationInput() {
                 value={rawText}
                 onChange={e => setRawText(e.target.value)}
                 placeholder={`Paste your chat here...\n\nSupported formats:\n- Alternating messages (one per line)\n- Marked messages with "Me:" or "Them:" prefix`}
+                aria-describedby="textarea-help"
               />
+              <div id="textarea-help" className={styles.textareaHelp}>
+                One message per line. Add &quot;Me:&quot; or &quot;Them:&quot; prefix for marked mode.
+              </div>
             </div>
 
             {/* Controls */}
             <div className={styles.controlsRow}>
               {/* Parse mode toggle */}
-              <div className={styles.modeToggle}>
+              <div className={styles.modeToggle} role="radiogroup" aria-label="Parse mode">
                 <button
                   className={`${styles.modeButton} ${
                     parseMode === 'alternating' ? styles.modeButtonActive : ''
                   }`}
                   onClick={() => setParseMode('alternating')}
+                  role="radio"
+                  aria-checked={parseMode === 'alternating'}
                 >
                   Alternating
                 </button>
@@ -153,6 +179,8 @@ export default function ConversationInput() {
                     parseMode === 'marked' ? styles.modeButtonActive : ''
                   }`}
                   onClick={() => setParseMode('marked')}
+                  role="radio"
+                  aria-checked={parseMode === 'marked'}
                 >
                   Marked (Me:/Them:)
                 </button>
@@ -163,20 +191,28 @@ export default function ConversationInput() {
                 className={styles.parseButton}
                 onClick={handleParse}
                 disabled={rawText.trim().length === 0}
+                aria-label="Parse conversation"
               >
                 Parse Conversation
               </button>
             </div>
-          </>
+          </div>
         )}
 
         {/* Upload screenshot tab */}
         {activeTab === 'upload' && (
-          <OCRUploader onTextExtracted={handleOCRTextExtracted} />
+          <div id="panel-upload" role="tabpanel">
+            <OCRUploader onTextExtracted={handleOCRTextExtracted} />
+          </div>
         )}
 
         {/* Error message */}
-        {error && <div className={styles.errorMessage}>{error}</div>}
+        {error && (
+          <div className={styles.errorMessage} role="alert">
+            <span className={styles.errorIcon}>⚠️</span>
+            <span>{error}</span>
+          </div>
+        )}
 
         {/* Editor section (shown after parsing or OCR) */}
         {(hasParsed || messages.length > 0) && (
@@ -190,6 +226,7 @@ export default function ConversationInput() {
                   ? styles.validationInfoValid
                   : styles.validationInfoInvalid
               }`}
+              role="status"
             >
               {validation.reason || `${messages.length} messages ready for scoring.`}
             </div>
@@ -200,6 +237,7 @@ export default function ConversationInput() {
                 className={styles.continueButton}
                 onClick={handleContinue}
                 disabled={!validation.valid}
+                aria-label="Continue to scoring"
               >
                 Continue to Scoring
               </button>

@@ -220,7 +220,7 @@ describe('OCRUploader → parseChatText handoff', () => {
     );
 
     // Switch to Upload tab
-    const uploadTab = screen.getByRole('button', { name: /upload screenshot/i });
+    const uploadTab = screen.getByRole('tab', { name: /upload screenshot/i });
     await user.click(uploadTab);
 
     // Verify OCRUploader is rendered
