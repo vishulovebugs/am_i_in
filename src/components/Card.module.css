@@ -1,0 +1,22 @@
+/* src/components/Card.module.css */
+
+.card {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Variants */
+.compact {
+  padding: 1rem;
+}
+
+.spacious {
+  padding: 2rem;
+}
+
+/* No shadow option */
+.noShadow {
+  box-shadow: none;
+}

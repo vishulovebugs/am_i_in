@@ -1,0 +1,19 @@
+/* src/components/DisclaimerBanner.module.css */
+
+.banner {
+  background-color: var(--warning-light);
+  border: 1px solid var(--warning);
+  border-radius: 0.5rem;
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Standalone variant for landing page */
+.standalone {
+  background-color: var(--accent-light);
+  border-color: var(--accent);
+  font-weight: 500;
+}

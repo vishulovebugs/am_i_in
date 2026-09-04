@@ -124,14 +124,8 @@ report(
     : `missing from prompt: ${missingFromPrompt.join(", ")}`
 );
 
-// Also check the reverse: any signal in the prompt not in the schema (informational).
-const promptSignalMentions = schemaSignalNames.filter((name) =>
-  promptText.includes(name)
-);
-// We don't do a full reverse check here since the prompt may mention extra terms,
-// but we confirm the core six are covered.
-
 // ---------------------------------------------------------------------------
+
 // Summary
 // ---------------------------------------------------------------------------
 if (failures === 0) {
